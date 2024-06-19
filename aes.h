@@ -23,9 +23,15 @@
 //#define AES192 1
 //#define AES256 1
 
+typedef enum
+{
+  NoPadding,
+  PKCS7Padding,
+} Padding_t;
+
 #if defined(ECB) && (ECB == 1)
 
-uint16_t AES_ECB_encrypt(uint8_t* input, const uint8_t* key, uint8_t* output, const uint32_t length);
+uint16_t AES_ECB_encrypt(uint8_t* input, const uint8_t* key, Padding_t padding, uint8_t* output, const uint32_t inputLength);
 void AES_ECB_decrypt(const uint8_t* input, const uint8_t* key, uint8_t *output, const uint32_t length);
 
 #endif // #if defined(ECB) && (ECB == !)

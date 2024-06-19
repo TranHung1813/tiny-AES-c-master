@@ -508,7 +508,7 @@ static void ECB_Decrypt(const uint8_t* input, const uint8_t* key, uint8_t *outpu
  * @version	:
  * @reviewer:	
  */
-uint16_t AES_ECB_encrypt(uint8_t* input, const uint8_t* key, uint8_t* output, const uint32_t inputLength)
+uint16_t AES_ECB_encrypt(uint8_t* input, const uint8_t* key, Padding_t padding, uint8_t* output, const uint32_t inputLength)
 {
 	uint16_t i, PaddingNumber;
 	
@@ -521,7 +521,13 @@ uint16_t AES_ECB_encrypt(uint8_t* input, const uint8_t* key, uint8_t* output, co
   /* No-Padding mode - Padding bang cach set gia tri bang gia tri space*/
 	for(i = 0; i < PaddingNumber; i++)
 	{
-    if(i >= inputLength) input[i] = (uint8_t) ' ';
+    if(i >= inputLength) 
+    {
+      if (padding == NoPadding)
+        input[i] = (uint8_t) ' ';
+      else if (padding == PKCS7Padding)
+        input[i] = PaddingNumber - inputLength;
+    }
 	}
 
 	/* Encrypt block 16 */

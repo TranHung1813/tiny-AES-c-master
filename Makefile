@@ -73,9 +73,10 @@ get_ecb.o : get_ecb.c aes.h aes.o base64.h base64.o
 get_ecb.elf : aes.o base64.o get_ecb.o
 	echo [LD] $@
 	$(LD) $(LDFLAGS) -o $@ $^
-gen:
+
+gen_ecb:
 	make clean && make gen_ecb.elf && ./gen_ecb.elf
-get:
+get_ecb:
 	make clean && make get_ecb.elf && ./get_ecb.elf
 
 all:
