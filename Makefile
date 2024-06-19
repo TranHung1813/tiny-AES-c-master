@@ -77,5 +77,10 @@ gen:
 	make clean && make gen_ecb.elf && ./gen_ecb.elf
 get:
 	make clean && make get_ecb.elf && ./get_ecb.elf
+
+all:
+	gcc -o gen gen_ecb.c aes.c base64.c -I.
+	gcc -o get get_ecb.c aes.c base64.c -I.
+
 lint:
 	$(call SPLINT)
